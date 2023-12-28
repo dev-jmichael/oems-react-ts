@@ -9,3 +9,10 @@ export const getAcronym = (text: string) => {
     // Join the resulting array of uppercase letters into a string
     .join('');
 }
+
+export const convertToTitleCase = (str: string) => {
+    if (!str) {
+        return ""
+    }
+    return str.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+}

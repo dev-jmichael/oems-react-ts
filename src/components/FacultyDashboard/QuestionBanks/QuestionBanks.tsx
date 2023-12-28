@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useCallback, useEffect, useState } from "react";
 import { panelStyle } from "../styles";
 import { Col, Container } from "react-bootstrap";
 import QuestionBankCard from "./QuestionBankCard";
@@ -7,7 +7,7 @@ import { QuestionBank } from "@type/QuestionBank";
 import QuestionBankActions from "./QuestionBankActions";
 import BasicPagination from "../UI/BasicPagination";
 import { PaginationDetails } from "@type/PaginationDetails";
-import { getQuestionBanks } from "@services/questionBankService";
+import { createQuestionBank, getQuestionBanks } from "@services/questionBankService";
 
 function QuestionBanks() {
   const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([])
@@ -19,22 +19,31 @@ function QuestionBanks() {
     ...panelStyle,
   };
 
-  useEffect(() => {
-    const fetchQuestionBanks = async () => {
-      try {
-        const response = await getQuestionBanks(selectedPage);
-        const { data, pagination } = response.data.payload;
-        setQuestionBanks(data);
-        setPaginationDetails(pagination);
-      } catch (error) {
-        console.log(error)
-      }
+  const fetchQuestionBanks = useCallback(async () => {
+    try {
+      const response = await getQuestionBanks(selectedPage);
+      const { data, pagination } = response.data.payload;
+      setQuestionBanks(data);
+      setPaginationDetails(pagination);
+    } catch (error) {
+      console.log(error);
     }
+  }, [selectedPage]);
 
+  const submitTitle = async (title: string) => {
+    try {
+      const response = await createQuestionBank(title);
+      fetchQuestionBanks();
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
     fetchQuestionBanks();
-  }, [selectedPage])
+  }, [fetchQuestionBanks])
   
-
   return (
     <Container fluid style={questionBanksStyle}>
 
@@ -43,6 +52,7 @@ function QuestionBanks() {
       <QuestionBankActions 
         createMode={createMode} 
         setCreateMode={setCreateMode}
+        submitTitle={submitTitle}
       />
     
       <QuestionBankGrid>
