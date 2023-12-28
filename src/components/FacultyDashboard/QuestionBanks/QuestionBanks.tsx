@@ -7,13 +7,18 @@ import { QuestionBank } from "@type/QuestionBank";
 import QuestionBankActions from "./QuestionBankActions";
 import BasicPagination from "../UI/BasicPagination";
 import { PaginationDetails } from "@type/PaginationDetails";
-import { createQuestionBank, getQuestionBanks } from "@services/questionBankService";
+import {
+  createQuestionBank,
+  getQuestionBanks,
+} from "@services/questionBankService";
 
 function QuestionBanks() {
-  const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([])
-  const [paginationDetails, setPaginationDetails] = useState<PaginationDetails>({});
-  const [selectedPage, setSelectedPage] = useState<number>(1)
-  const [createMode, setCreateMode] = useState<boolean>(false)
+  const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([]);
+  const [paginationDetails, setPaginationDetails] = useState<PaginationDetails>(
+    {}
+  );
+  const [selectedPage, setSelectedPage] = useState<number>(1);
+  const [createMode, setCreateMode] = useState<boolean>(false);
 
   const questionBanksStyle: CSSProperties = {
     ...panelStyle,
@@ -34,43 +39,44 @@ function QuestionBanks() {
     try {
       const response = await createQuestionBank(title);
       fetchQuestionBanks();
-      console.log(response.data)
+      console.log(response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchQuestionBanks();
-  }, [fetchQuestionBanks])
-  
+  }, [fetchQuestionBanks]);
+
   return (
     <Container fluid style={questionBanksStyle}>
+      <h5 style={{ fontWeight: "bold", color: "white" }}>Question Banks</h5>
 
-      <h5 style={{ fontWeight: 'bold', color: 'white' }}>Question Banks</h5>
-    
-      <QuestionBankActions 
-        createMode={createMode} 
+      <QuestionBankActions
+        createMode={createMode}
         setCreateMode={setCreateMode}
         submitTitle={submitTitle}
       />
-    
+
       <QuestionBankGrid>
         {questionBanks.map((questionBank, index) => (
           <Col key={index} md={4} className="mb-4">
-            <QuestionBankCard key={questionBank.questionBankId} data={questionBank} />
+            <QuestionBankCard
+              key={questionBank.questionBankId}
+              data={questionBank}
+            />
           </Col>
         ))}
       </QuestionBankGrid>
-    
-      <BasicPagination 
-        page={paginationDetails.page} 
-        totalPages={paginationDetails.totalPages} 
+
+      <BasicPagination
+        page={paginationDetails.page}
+        totalPages={paginationDetails.totalPages}
         setSelectedPage={setSelectedPage}
       />
-
     </Container>
-  )
+  );
 }
 
-export default QuestionBanks
+export default QuestionBanks;

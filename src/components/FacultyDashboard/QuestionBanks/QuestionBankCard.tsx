@@ -1,6 +1,6 @@
-import { Card, Button } from "react-bootstrap"
+import { Card, Button } from "react-bootstrap";
 import { QuestionBank } from "../../../types/QuestionBank";
-import { getAcronym } from '../../../utils/StringUtil';
+import { getAcronym } from "../../../utils/StringUtil";
 
 interface QuestionBankCardProps {
   data: QuestionBank;
@@ -12,13 +12,11 @@ const QuestionBankCard: React.FC<QuestionBankCardProps> = ({ data }) => {
       <Card.Header>{data.questionBankId}</Card.Header>
       <Card.Body>
         <Card.Title>{data.title}</Card.Title>
-        <Card.Text>
-          {getAcronym(data.title)}
-        </Card.Text>
+        <Card.Text>{getAcronym(data.title)}</Card.Text>
         <Button>Open</Button>
       </Card.Body>
     </Card>
-  )
-}
+  );
+};
 
-export default QuestionBankCard
+export default QuestionBankCard;
