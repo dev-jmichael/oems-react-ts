@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { commonStyle } from "../../styles";
+import { commonStyle } from "../styles";
 
 const sidebarStyle: CSSProperties = {
     ...commonStyle,

@@ -5,7 +5,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { RiFileList2Line } from "react-icons/ri";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import Logo from "@assets/logo.png";
-import { sidebarStyle, defaultLinkStyle, activeLinkStyle } from "./sidebarStyles";
+import { sidebarStyle, defaultLinkStyle, activeLinkStyle } from "./styles";
 
 function Sidebar() {
   const parentRoute = "/faculty";

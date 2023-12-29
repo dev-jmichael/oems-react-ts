@@ -19,6 +19,7 @@ export const actionsContainerStyle: CSSProperties = {
 export const gridStyle: CSSProperties = {
     display: "grid",
     gap: "1em",
+    padding: '0',
     gridTemplateColumns: "repeat(3, 1fr)",
 };
 
