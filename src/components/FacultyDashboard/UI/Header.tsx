@@ -4,17 +4,12 @@ import { commonStyle } from "../styles";
 function Header() {
   const headerStyle: CSSProperties = {
     ...commonStyle,
-    width: '100%',
-    padding: '20px',
-    height: '8vh',
-    backgroundColor: 'white',
+    padding: "20px",
+    height: "8vh",
+    backgroundColor: "white",
   };
 
-  return (
-    <div style={headerStyle}>
-     
-    </div>
-  )
+  return <div style={headerStyle}></div>;
 }
 
-export default Header
+export default Header;

@@ -1,15 +1,15 @@
 import { CSSProperties } from "react";
-import { panelStyle } from "../styles";
+import { mainContentStyle } from "../styles";
 
 function Dashboard() {
   const dashboardStyle: CSSProperties = {
-    ...panelStyle,
+    ...mainContentStyle,
   };
   return (
     <div style={dashboardStyle}>
-      <h6 style={{ fontWeight: 'bold' }}>Dashboard</h6>
+      <h6 style={{ fontWeight: "bold" }}>Dashboard</h6>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

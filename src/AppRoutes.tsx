@@ -1,3 +1,4 @@
+import { PaginationProvider } from "./context/PaginationContext";
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 const Home = lazy(() => import("@pages/Home"));
@@ -27,7 +28,14 @@ const AppRoutes: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/student/*" element={<StudentDashboard />} />
-        <Route path="/faculty" element={<FacultyDashboard />}>
+        <Route
+          path="/faculty"
+          element={
+            <PaginationProvider>
+              <FacultyDashboard />
+            </PaginationProvider>
+          }
+        >
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="question-banks" element={<QuestionBanks />} />
           <Route path="exams" element={<Exams />} />

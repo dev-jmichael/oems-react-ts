@@ -3,7 +3,6 @@ import { commonStyle } from "../../styles";
 
 const sidebarStyle: CSSProperties = {
     ...commonStyle,
-    width: '300px',
     padding: '20px',
     height: '100%',
     alignSelf: 'center',

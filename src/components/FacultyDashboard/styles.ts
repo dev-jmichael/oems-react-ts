@@ -5,20 +5,20 @@ const boxShadowStyle: CSSProperties = {
 }
 
 const commonStyle: CSSProperties = {
-    position: 'relative',
     borderRadius: '26px',
     ...boxShadowStyle
 };
 
-const panelStyle: CSSProperties = {
-    position: 'relative',
-    width: '100%',
-    padding: '20px',
-    height: '100%',
+const mainContentStyle: CSSProperties = {
+    display: 'flex',
+    flexGrow: '1',
+    flexDirection: 'column',
+    gap: '1em',
+    padding: '20px'
 }
 
 export {
     boxShadowStyle,
     commonStyle,
-    panelStyle
+    mainContentStyle
 }

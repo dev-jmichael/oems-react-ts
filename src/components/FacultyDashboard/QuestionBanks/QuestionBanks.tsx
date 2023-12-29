@@ -1,39 +1,43 @@
-import { CSSProperties, useCallback, useEffect, useState } from "react";
-import { panelStyle } from "../styles";
-import { Col, Container } from "react-bootstrap";
+import {
+  CSSProperties,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { mainContentStyle } from "../styles";
+import { Container } from "react-bootstrap";
 import QuestionBankCard from "./QuestionBankCard";
 import QuestionBankGrid from "./QuestionBankGrid";
 import { QuestionBank } from "@type/QuestionBank";
 import QuestionBankActions from "./QuestionBankActions";
-import BasicPagination from "../UI/BasicPagination";
-import { PaginationDetails } from "@type/PaginationDetails";
 import {
   createQuestionBank,
   getQuestionBanks,
 } from "@services/questionBankService";
+import { PaginationContext } from "../../../context/PaginationContext";
 
 function QuestionBanks() {
   const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([]);
-  const [paginationDetails, setPaginationDetails] = useState<PaginationDetails>(
-    {}
-  );
-  const [selectedPage, setSelectedPage] = useState<number>(1);
+  const { paginationDetails, setPaginationDetails } =
+    useContext(PaginationContext);
   const [createMode, setCreateMode] = useState<boolean>(false);
 
   const questionBanksStyle: CSSProperties = {
-    ...panelStyle,
+    ...mainContentStyle,
   };
 
   const fetchQuestionBanks = useCallback(async () => {
     try {
-      const response = await getQuestionBanks(selectedPage);
+      const response = await getQuestionBanks(paginationDetails.page);
       const { data, pagination } = response.data.payload;
       setQuestionBanks(data);
       setPaginationDetails(pagination);
     } catch (error) {
       console.log(error);
     }
-  }, [selectedPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paginationDetails.page]);
 
   const submitTitle = async (title: string) => {
     try {
@@ -60,21 +64,13 @@ function QuestionBanks() {
       />
 
       <QuestionBankGrid>
-        {questionBanks.map((questionBank, index) => (
-          <Col key={index} md={4} className="mb-4">
-            <QuestionBankCard
-              key={questionBank.questionBankId}
-              data={questionBank}
-            />
-          </Col>
+        {questionBanks.map((questionBank) => (
+          <QuestionBankCard
+            key={questionBank.questionBankId}
+            data={questionBank}
+          />
         ))}
       </QuestionBankGrid>
-
-      <BasicPagination
-        page={paginationDetails.page}
-        totalPages={paginationDetails.totalPages}
-        setSelectedPage={setSelectedPage}
-      />
     </Container>
   );
 }

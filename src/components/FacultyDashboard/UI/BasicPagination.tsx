@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction } from "react";
 import { Pagination } from "react-bootstrap";
 
 interface PaginationProps {
   page?: number;
   totalPages?: number;
-  setSelectedPage: Dispatch<SetStateAction<number>>;
+  setSelectedPage: (page: number) => void;
 }
 
 const PaginationItem: React.FC<PaginationProps> = ({
