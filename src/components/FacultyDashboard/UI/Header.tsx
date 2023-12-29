@@ -1,15 +1,12 @@
-import { CSSProperties } from "react";
-import { commonStyle } from "../styles";
+import ProfileDropdown from "./ProfileDropdown";
+import { headerStyle } from "./styles";
 
 function Header() {
-  const headerStyle: CSSProperties = {
-    ...commonStyle,
-    padding: "20px",
-    height: "8vh",
-    backgroundColor: "white",
-  };
-
-  return <div style={headerStyle}></div>;
+  return (
+    <header style={headerStyle}>
+      <ProfileDropdown />
+    </header>
+  );
 }
 
 export default Header;
