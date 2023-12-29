@@ -2,13 +2,13 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { Button } from "react-bootstrap";
 import { convertToTitleCase } from "../../../utils/StringUtil";
 
-interface CreateInputFieldProps {
+interface CreateQuestionBankFormProps {
   createMode: boolean;
   setCreateMode: Dispatch<SetStateAction<boolean>>;
   submitTitle: (title: string) => Promise<void>;
 }
 
-const CreateInputField: React.FC<CreateInputFieldProps> = ({
+const CreateQuestionBankForm: React.FC<CreateQuestionBankFormProps> = ({
   createMode,
   setCreateMode,
   submitTitle,
@@ -38,4 +38,4 @@ const CreateInputField: React.FC<CreateInputFieldProps> = ({
   );
 };
 
-export default CreateInputField;
+export default CreateQuestionBankForm;
