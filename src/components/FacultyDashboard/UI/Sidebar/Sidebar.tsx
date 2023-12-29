@@ -5,11 +5,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { RiFileList2Line } from "react-icons/ri";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import Logo from "@assets/logo.png";
-import {
-  sidebarStyle,
-  defaultLinkStyle,
-  activeLinkStyle,
-} from "./sidebarStyles";
+import { sidebarStyle, defaultLinkStyle, activeLinkStyle } from "./sidebarStyles";
 
 function Sidebar() {
   const parentRoute = "/faculty";
@@ -38,9 +34,7 @@ function Sidebar() {
 
   return (
     <Container style={sidebarStyle}>
-      <div
-        style={{ textAlign: "center", marginBottom: "4em", marginTop: "4em" }}
-      >
+      <div style={{ textAlign: "center", marginBottom: "4em", marginTop: "4em" }}>
         <img src={Logo} alt="Logo" width={80} />
       </div>
 
@@ -49,9 +43,7 @@ function Sidebar() {
           <NavLink
             key={index}
             to={props.route}
-            style={({ isActive }) =>
-              isActive ? activeLinkStyle : defaultLinkStyle
-            }
+            style={({ isActive }) => (isActive ? activeLinkStyle : defaultLinkStyle)}
           >
             <span>{props.icon}</span>
             {props.linkTitle}

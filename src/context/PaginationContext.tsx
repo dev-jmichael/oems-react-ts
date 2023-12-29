@@ -1,7 +1,4 @@
-import {
-  PaginationContextType,
-  PaginationDetails,
-} from "@type/PaginationDetails";
+import { PaginationContextType, PaginationDetails } from "@type/PaginationDetails";
 import React, { useState, createContext } from "react";
 
 const defaultPaginationDetails: PaginationDetails = {
@@ -24,16 +21,10 @@ interface PaginationProviderProps {
   children: React.ReactNode;
 }
 
-export const PaginationContext = createContext<PaginationContextType>(
-  defaultPaginationContext
-);
+export const PaginationContext = createContext<PaginationContextType>(defaultPaginationContext);
 
-export const PaginationProvider: React.FC<PaginationProviderProps> = ({
-  children,
-}) => {
-  const [paginationDetails, setPaginationDetails] = useState(
-    defaultPaginationDetails
-  );
+export const PaginationProvider: React.FC<PaginationProviderProps> = ({ children }) => {
+  const [paginationDetails, setPaginationDetails] = useState(defaultPaginationDetails);
 
   const handleSetPaginationDetails = (data: PaginationDetails) => {
     setPaginationDetails(data);

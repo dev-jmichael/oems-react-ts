@@ -6,11 +6,7 @@ interface PaginationProps {
   setSelectedPage: (page: number) => void;
 }
 
-const PaginationItem: React.FC<PaginationProps> = ({
-  page,
-  totalPages,
-  setSelectedPage,
-}) => {
+const PaginationItem: React.FC<PaginationProps> = ({ page, totalPages, setSelectedPage }) => {
   return [...Array(totalPages)].map((_, index) => (
     <Pagination.Item
       key={index + 1}
@@ -22,15 +18,9 @@ const PaginationItem: React.FC<PaginationProps> = ({
   ));
 };
 
-const BasicPagination: React.FC<PaginationProps> = ({
-  page,
-  totalPages,
-  setSelectedPage,
-}) => {
+const BasicPagination: React.FC<PaginationProps> = ({ page, totalPages, setSelectedPage }) => {
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "1em" }}
-    >
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "1em" }}>
       <Pagination size="lg">
         <PaginationItem
           key={page}
