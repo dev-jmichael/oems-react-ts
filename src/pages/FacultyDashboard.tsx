@@ -12,10 +12,10 @@ function FacultyDashboard() {
 
   return (
     <Container fluid style={facultyDashboardStyle}>
-      <div>
+      <aside>
         <Sidebar />
-      </div>
-      <div style={mainContainerStyle}>
+      </aside>
+      <main style={mainContainerStyle}>
         <Header />
         <Outlet />
         <BasicPagination
@@ -23,7 +23,7 @@ function FacultyDashboard() {
           totalPages={paginationDetails.totalPages}
           setSelectedPage={setSelectedPage}
         />
-      </div>
+      </main>
     </Container>
   );
 }
