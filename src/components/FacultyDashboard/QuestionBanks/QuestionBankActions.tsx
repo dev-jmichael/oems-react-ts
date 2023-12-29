@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import CreateQuestionBankForm from "./CreateQuestionBankForm";
 import CreateNewButton from "./CreateNewButton";
+import { actionsContainerStyle } from "./styles";
 
 interface QuestionBankActionsProps {
   createMode: boolean;
@@ -14,13 +15,7 @@ const QuestionBankActions: React.FC<QuestionBankActionsProps> = ({
   submitTitle,
 }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "15px 0px",
-      }}
-    >
+    <div style={actionsContainerStyle}>
       {createMode ? (
         <CreateQuestionBankForm
           createMode={createMode}
@@ -28,10 +23,7 @@ const QuestionBankActions: React.FC<QuestionBankActionsProps> = ({
           submitTitle={submitTitle}
         />
       ) : (
-        <CreateNewButton
-          createMode={createMode}
-          setCreateMode={setCreateMode}
-        />
+        <CreateNewButton createMode={createMode} setCreateMode={setCreateMode} />
       )}
       <input type="text" placeholder="Search" />
     </div>

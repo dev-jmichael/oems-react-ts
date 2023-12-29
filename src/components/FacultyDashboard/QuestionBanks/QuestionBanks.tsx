@@ -1,5 +1,4 @@
-import { CSSProperties, useCallback, useContext, useEffect, useState } from "react";
-import { mainContentStyle } from "../styles";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import QuestionBankCard from "./QuestionBankCard";
 import QuestionBankGrid from "./QuestionBankGrid";
@@ -7,15 +6,12 @@ import { QuestionBank } from "@type/QuestionBank";
 import QuestionBankActions from "./QuestionBankActions";
 import { createQuestionBank, getQuestionBanks } from "@services/questionBankService";
 import { PaginationContext } from "../../../context/PaginationContext";
+import { questionBanksStyle } from "./styles";
 
 function QuestionBanks() {
   const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([]);
   const { paginationDetails, setPaginationDetails } = useContext(PaginationContext);
   const [createMode, setCreateMode] = useState<boolean>(false);
-
-  const questionBanksStyle: CSSProperties = {
-    ...mainContentStyle,
-  };
 
   const fetchQuestionBanks = useCallback(async () => {
     try {

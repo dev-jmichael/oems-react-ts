@@ -1,17 +1,12 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
+import { gridStyle } from "./styles";
 
 interface QuestionBankGridProps {
   children: React.ReactNode;
 }
 
 const QuestionBankGrid: React.FC<QuestionBankGridProps> = ({ children }) => {
-  const gridStyle: CSSProperties = {
-    display: "grid",
-    gap: "1em",
-    gridTemplateColumns: "repeat(3, 1fr)",
-  };
-
   return (
     <Container fluid style={gridStyle}>
       {children}
