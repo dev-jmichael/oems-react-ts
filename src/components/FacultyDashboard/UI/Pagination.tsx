@@ -25,11 +25,20 @@ const PaginationItem: React.FC<PaginationProps> = ({ currentPage, totalPages }) 
 const Pagination: React.FC = () => {
   const currentPage = useSelector((state: RootState) => state.currentPage.value);
   const totalPages = useSelector((state: RootState) => state.pageData.totalPages);
+  const dispatch = useDispatch();
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "1em" }}>
       <Page size="lg">
+        <Page.Prev
+          onClick={() => dispatch(setCurrentPage(currentPage - 1))}
+          disabled={currentPage === 1}
+        />
         <PaginationItem key={currentPage} currentPage={currentPage} totalPages={totalPages} />
+        <Page.Next
+          onClick={() => dispatch(setCurrentPage(currentPage + 1))}
+          disabled={currentPage === totalPages}
+        />
       </Page>
     </div>
   );
