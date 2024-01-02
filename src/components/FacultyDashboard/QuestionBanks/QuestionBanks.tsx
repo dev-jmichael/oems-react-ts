@@ -9,7 +9,6 @@ import { questionBanksStyle } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { setPageData } from "../../../features/pagination/pageDataSlice";
-import { setCurrentPage } from "../../../features/pagination/currentPageSlice";
 
 function QuestionBanks() {
   const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([]);
@@ -33,7 +32,6 @@ function QuestionBanks() {
       const response = await createQuestionBank(title);
       console.log(response.data);
       fetchQuestionBanks();
-      dispatch(setCurrentPage(1));
     } catch (error) {
       console.log(error);
     }
