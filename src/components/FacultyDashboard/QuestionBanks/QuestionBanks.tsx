@@ -1,35 +1,38 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Container } from "react-bootstrap";
 import QuestionBankCard from "./QuestionBankCard";
 import QuestionBankGrid from "./QuestionBankGrid";
 import { QuestionBank } from "@type/QuestionBank";
 import QuestionBankActions from "./QuestionBankActions";
 import { createQuestionBank, getQuestionBanks } from "@services/questionBankService";
-import { PaginationContext } from "../../../context/PaginationContext";
 import { questionBanksStyle } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { setPageData } from "../../../features/pagination/pageDataSlice";
 
 function QuestionBanks() {
   const [questionBanks, setQuestionBanks] = useState<QuestionBank[]>([]);
-  const { paginationDetails, setPaginationDetails } = useContext(PaginationContext);
+  const currentPage = useSelector((state: RootState) => state.currentPage.value);
+  const dispatch = useDispatch();
   const [createMode, setCreateMode] = useState<boolean>(false);
 
   const fetchQuestionBanks = useCallback(async () => {
     try {
-      const response = await getQuestionBanks(paginationDetails.page);
+      const response = await getQuestionBanks(currentPage);
       const { data, pagination } = response.data.payload;
       setQuestionBanks(data);
-      setPaginationDetails(pagination);
+      dispatch(setPageData(pagination));
     } catch (error) {
       console.log(error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paginationDetails.page]);
+  }, [currentPage, dispatch]);
 
   const submitTitle = async (title: string) => {
     try {
       const response = await createQuestionBank(title);
-      fetchQuestionBanks();
       console.log(response.data);
+      const { payload } = response.data;
+      setQuestionBanks([payload, ...questionBanks]);
     } catch (error) {
       console.log(error);
     }

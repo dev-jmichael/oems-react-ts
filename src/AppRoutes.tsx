@@ -1,4 +1,3 @@
-import { PaginationProvider } from "./context/PaginationContext";
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 const Home = lazy(() => import("@pages/Home"));
@@ -7,16 +6,12 @@ const Login = lazy(() => import("@pages/Login"));
 const SignUp = lazy(() => import("@pages/SignUp"));
 const StudentDashboard = lazy(() => import("@pages/StudentDashboard"));
 const FacultyDashboard = lazy(() => import("@pages/FacultyDashboard"));
-const Dashboard = lazy(
-  () => import("@components/FacultyDashboard/Dashboard/Dashboard")
-);
+const Dashboard = lazy(() => import("@components/FacultyDashboard/Dashboard/Dashboard"));
 const QuestionBanks = lazy(
   () => import("@components/FacultyDashboard/QuestionBanks/QuestionBanks")
 );
 const Exams = lazy(() => import("@components/FacultyDashboard/Exams/Exams"));
-const Reports = lazy(
-  () => import("@components/FacultyDashboard/Reports/Reports")
-);
+const Reports = lazy(() => import("@components/FacultyDashboard/Reports/Reports"));
 const NotFound = lazy(() => import("@pages/NotFound"));
 
 const AppRoutes: React.FC = () => {
@@ -28,14 +23,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/student/*" element={<StudentDashboard />} />
-        <Route
-          path="/faculty"
-          element={
-            <PaginationProvider>
-              <FacultyDashboard />
-            </PaginationProvider>
-          }
-        >
+        <Route path="/faculty" element={<FacultyDashboard />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="question-banks" element={<QuestionBanks />} />
           <Route path="exams" element={<Exams />} />
