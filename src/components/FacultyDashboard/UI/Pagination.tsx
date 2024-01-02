@@ -11,13 +11,31 @@ interface PaginationProps {
 const PaginationItem: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
   const dispatch = useDispatch();
 
-  return Array.from({ length: totalPages }, (_, index) => (
+  const maxPageButtons = 5;
+
+  const getPaginationRange = () => {
+    // Start and end page numbers
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPages, start + maxPageButtons - 1);
+
+    // Adjust the start and end if the current page is near the beginning or end
+    if (currentPage < 3) {
+      end = Math.min(totalPages, maxPageButtons);
+    } else if (currentPage > totalPages - 3) {
+      start = Math.max(1, totalPages - maxPageButtons + 1);
+    }
+
+    // Generate the range
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  };
+
+  return getPaginationRange().map((pageNumber) => (
     <Page.Item
-      key={index + 1}
-      active={index + 1 === currentPage}
-      onClick={() => dispatch(setCurrentPage(index + 1))}
+      key={pageNumber}
+      active={pageNumber === currentPage}
+      onClick={() => dispatch(setCurrentPage(pageNumber))}
     >
-      {index + 1}
+      {pageNumber}
     </Page.Item>
   ));
 };
