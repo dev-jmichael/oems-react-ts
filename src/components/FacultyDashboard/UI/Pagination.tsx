@@ -48,6 +48,7 @@ const Pagination: React.FC = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "1em" }}>
       <Page size="lg">
+        <Page.First onClick={() => dispatch(setCurrentPage(1))} />
         <Page.Prev
           onClick={() => dispatch(setCurrentPage(currentPage - 1))}
           disabled={currentPage === 1}
@@ -57,6 +58,7 @@ const Pagination: React.FC = () => {
           onClick={() => dispatch(setCurrentPage(currentPage + 1))}
           disabled={currentPage === totalPages}
         />
+        <Page.Last onClick={() => dispatch(setCurrentPage(totalPages))} />
       </Page>
     </div>
   );
